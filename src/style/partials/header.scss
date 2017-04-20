@@ -1,0 +1,82 @@
+/* ########################
+####       HEADER      ####
+######################## */
+
+.header {
+    background: url('../img/header-bg.png');
+    color: white;
+    height: 690px;
+    background-size: 1920px 690px;
+    background-position: center;
+    padding-top: 97px;
+    box-sizing: border-box;
+}
+
+.logo {
+    white-space: nowrap;
+    text-indent: 100%;
+    overflow: hidden;
+    background: url(../img/attracti.svg) no-repeat;
+    height: 52px;
+    width: 474px;
+    margin: 0 auto;
+    left: 2px;
+    position: relative;
+}
+
+.header__country {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background: url(../img/switzerland.svg) no-repeat;
+    background-position: center;
+    height: 79px;
+    position: relative;
+    left: -1px;
+    margin-bottom: 47px;
+}
+
+.header__products {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -52px;
+}
+
+.header__product-item {
+    height: 244px;
+    width: 338px;
+    box-sizing: border-box;
+    border: 52px solid rgba(172, 44, 255, 0.21);
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 44px;
+    letter-spacing: 3px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.header__product-item:first-of-type {
+    font-size: 30px;
+    line-height: 35px;
+    letter-spacing: 2px;
+}
+
+.header__bottom-text {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 61px;
+    font-size: 24px;
+    line-height: 36px;
+}
+
+p {
+    font-size: 20px;
+    line-height: 34px;
+}
