@@ -3,13 +3,19 @@
 ######################## */
 
 .header {
-    background: url('../img/header-bg.png');
+    background: url('../img/header-bg.png') no-repeat;
     color: white;
     height: 690px;
     background-size: 1920px 690px;
     background-position: center;
     padding-top: 97px;
     box-sizing: border-box;
+}
+
+@media (min-width: 1920px) {
+    .header {
+        background-size: 100% auto;
+    }
 }
 
 .logo {
@@ -74,9 +80,4 @@
     padding-top: 61px;
     font-size: 24px;
     line-height: 36px;
-}
-
-p {
-    font-size: 20px;
-    line-height: 34px;
 }
