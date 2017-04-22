@@ -30,6 +30,25 @@
     position: relative;
 }
 
+.logo a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.logo--fixed {
+    position: fixed;
+    height: 21px;
+    background-size: contain;
+    left: 100px;
+    top: 50px;
+    z-index: 10;
+}
+
+.logo--black {
+    background: url(../img/attracti-b.svg) no-repeat;
+}
+
 .header__country {
     text-indent: 100%;
     white-space: nowrap;
@@ -40,6 +59,10 @@
     position: relative;
     left: -1px;
     margin-bottom: 47px;
+}
+
+.logo--fixed+.header__country {
+    margin-top: 52px;
 }
 
 .header__products {

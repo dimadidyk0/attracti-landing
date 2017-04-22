@@ -11,16 +11,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+window.addEventListener('load', function() {
 
-window.onscroll = function() {
-    findProduct();
-}
+    window.onscroll = function() {
+        findProduct();
+    }
+    document.addEventListener('scroll', playTourVideos);
+
+
+});
+
 
 function findProduct() {
 
     let products = document.querySelectorAll('.product');
     let scroll = window.scrollY;
     let windowH = window.innerHeight;
+
+
+
+    let tourMeetings = document.querySelector('.tour__meetings'),
+        tourTop = tourMeetings.offsetTop;
+    let tourH = tourMeetings.scrollHeight;
+
+
+    let logo = document.querySelector('.logo');
+    let logoTop = logo.scrollHeight + logo.offsetTop;
+    let necessaryTop = logo.offsetTop + logo.scrollHeight;
+    let whiteBlocks = document.querySelectorAll('.bg-white');
+
+
+    for (let i = 0; i < whiteBlocks.length; i++) {
+        let w = whiteBlocks[i];
+        let h = w.scrollHeight;
+        let top = w.offsetTop;
+        if (scroll > top - logoTop && scroll < top + h - logoTop) {
+            logo.classList.add('logo--black');
+            break;
+        } else logo.classList.remove('logo--black');
+        // });
+    }
+
+    if (scroll > necessaryTop) {
+        logo.classList.add('logo--fixed');
+    } else {
+        logo.classList.remove('logo--fixed');
+    }
+
 
     products.forEach(p => {
 
@@ -30,49 +67,52 @@ function findProduct() {
         let video = p.querySelector('video');
 
         if ((scroll > (x - 100)) && (scroll < (x + 100))) {
-            p.classList.add('product--current')
             video.play();
+            p.classList.add('product--current')
+                // p.parentNode.style.background = 'rgba(0,0,0,0.5)';
 
         } else if (video) {
             p.classList.remove('product--current')
             video.pause();
+            // p.parentNode.removeAttribute('style');
         }
     });
 
-    let tourMeetings = document.querySelector('.tour__meetings'),
-        tourTop = tourMeetings.offsetTop;
-    let tourH = tourMeetings.scrollHeight;
-
-    if (scroll >= tourTop - windowH + tourH) {
-        console.dir(tourMeetings);
-    }
 }
 
 
 function playTourVideos() {
 
-    let thisDoc = document;
-    let headerVideos = thisDoc.querySelectorAll('.tour__meetings .tour__video-block');
+    let scroll = window.scrollY,
+        tourMeetings = document.querySelector('.tour__meetings'),
+        tourTop = tourMeetings.offsetTop,
+        tourH = tourMeetings.scrollHeight,
+        windowH = window.innerHeight,
+        videos = document.querySelectorAll('.tour__meetings .tour__meet-block');
+
+    if (scroll >= tourTop - windowH + tourH) playVideo(videos, 0);
+
+    document.addEventListener('scroll', playTourVideos);
 
     function playVideo(arr, i) {
-
         if (i < arr.length) {
-            let layout = arr[i].querySelector('.header__video-block');
+            let layout = arr[i].querySelector('.tour__video-layout');
             let video = arr[i].querySelector('video');
 
-            arr[i].classList.add('header__video-block--current');
+            arr[i].classList.add('tour__meet-block--current');
             video.play();
 
             video.onended = function() {
-                arr[i].classList.remove('header__video-block--current');
-                i++;
+                arr[i].classList.remove('tour__meet-block--current');
+                if (i < arr.length - 1) i++;
+                else i = 0;
                 playVideo(arr, i);
             };
         }
     }
 
-    playVideo(headerVideos, 0);
 }
+
 
 // Contrast Functions:
 
