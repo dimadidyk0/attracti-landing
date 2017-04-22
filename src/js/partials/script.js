@@ -13,26 +13,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 window.addEventListener('load', function() {
 
-    window.onscroll = function() {
-        findProduct();
+    let scrolled = false;
+
+    window.onscroll = doItOnScroll;
+
+    function doItOnScroll() {
+        scrolled = true;
     }
+
+    setInterval(function() {
+        if (scrolled) {
+            scrolled = false;
+            logoChangesets();
+            findProduct();
+        }
+    }, 200);
+
+    // window.onscroll = function() {
+
+    // }
     document.addEventListener('scroll', playTourVideos);
 
 });
 
-
-function findProduct() {
-
-    let products = document.querySelectorAll('.product');
+function logoChangesets() {
     let scroll = window.scrollY;
     let windowH = window.innerHeight;
-
-
-
-    let tourMeetings = document.querySelector('.tour__meetings'),
-        tourTop = tourMeetings.offsetTop;
-    let tourH = tourMeetings.scrollHeight;
-
 
     let logo = document.querySelector('.logo');
     let logoTop = logo.scrollHeight + logo.offsetTop;
@@ -56,7 +62,14 @@ function findProduct() {
     } else {
         logo.classList.remove('logo--fixed');
     }
+}
 
+function findProduct() {
+
+    let scroll = window.scrollY;
+    let windowH = window.innerHeight;
+
+    let products = document.querySelectorAll('.product');
     products.forEach(p => {
 
         let blockH = parseInt(getComputedStyle(p).height);
