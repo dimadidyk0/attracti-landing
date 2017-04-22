@@ -29,9 +29,6 @@ window.addEventListener('load', function() {
         }
     }, 200);
 
-    // window.onscroll = function() {
-
-    // }
     document.addEventListener('scroll', playTourVideos);
 
 });
@@ -93,7 +90,7 @@ function findProduct() {
 
 
 function playTourVideos() {
-
+    console.log('hi');
     let scroll = window.scrollY,
         tourMeetings = document.querySelector('.tour__meetings'),
         tourTop = tourMeetings.offsetTop,
@@ -101,9 +98,10 @@ function playTourVideos() {
         windowH = window.innerHeight,
         videos = document.querySelectorAll('.tour__meetings .tour__meet-block');
 
-    if (scroll >= tourTop - windowH + tourH) playVideo(videos, 0);
-
-    document.removeEventListener('scroll', playTourVideos);
+    if (scroll >= tourTop - windowH + tourH) {
+        playVideo(videos, 0);
+        document.removeEventListener('scroll', playTourVideos);
+    }
 
     function playVideo(arr, i) {
         if (i < arr.length) {
