@@ -18,7 +18,6 @@ window.addEventListener('load', function() {
     }
     document.addEventListener('scroll', playTourVideos);
 
-
 });
 
 
@@ -58,7 +57,6 @@ function findProduct() {
         logo.classList.remove('logo--fixed');
     }
 
-
     products.forEach(p => {
 
         let blockH = parseInt(getComputedStyle(p).height);
@@ -92,7 +90,7 @@ function playTourVideos() {
 
     if (scroll >= tourTop - windowH + tourH) playVideo(videos, 0);
 
-    document.addEventListener('scroll', playTourVideos);
+    document.removeEventListener('scroll', playTourVideos);
 
     function playVideo(arr, i) {
         if (i < arr.length) {
