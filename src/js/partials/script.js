@@ -1,19 +1,20 @@
-document.addEventListener('DOMContentLoaded', function() {
-    let thisDoc = document;
+'use strict';
 
-    let videoBlocks = thisDoc.querySelectorAll('.tour .tour__meet-block');
+document.addEventListener('DOMContentLoaded', function() {
+    var thisDoc = document;
+
+    var videoBlocks = thisDoc.querySelectorAll('.tour .tour__meet-block');
     videoBlocks.forEach((b, i) => {
-        let img = b.querySelector('video').getAttribute('poster');
-        b.querySelector('.tour__video-layout').style.backgroundImage = `url('../${img}')`;
+        var img = b.querySelector('video').getAttribute('poster');
+        b.querySelector('.tour__video-layout').style.backgroundImage = `url("${img}")`;
     });
     // set layer background image
-
 
 });
 
 window.addEventListener('load', function() {
 
-    let scrolled = false;
+    var scrolled = false;
 
     window.onscroll = doItOnScroll;
 
@@ -30,68 +31,70 @@ window.addEventListener('load', function() {
     }, 200);
 
     document.addEventListener('scroll', playTourVideos);
-
 });
 
 function logoChangesets() {
-    let scroll = window.scrollY;
-    let windowH = window.innerHeight;
+    var scroll = window.scrollY;
+    var windowH = window.innerHeight;
+    let windowW = window.innerWidth;
 
-    let logo = document.querySelector('.logo');
-    let logoTop = logo.scrollHeight + logo.offsetTop;
-    let necessaryTop = logo.offsetTop + logo.scrollHeight;
-    let whiteBlocks = document.querySelectorAll('.bg-white');
+    var logo = document.querySelector('.logo');
+    var logoTop = logo.scrollHeight + logo.offsetTop;
+    var necessaryTop = logo.offsetTop + logo.scrollHeight;
+    var whiteBlocks = document.querySelectorAll('.bg-white');
 
+    if (windowW >= 1600) {
 
-    for (let i = 0; i < whiteBlocks.length; i++) {
-        let w = whiteBlocks[i];
-        let h = w.scrollHeight;
-        let top = w.offsetTop;
-        if (scroll > top - logoTop && scroll < top + h - logoTop) {
-            logo.classList.add('logo--black');
-            break;
-        } else logo.classList.remove('logo--black');
-        // });
-    }
+        for (var i = 0; i < whiteBlocks.length; i++) {
+            var w = whiteBlocks[i];
+            var h = w.scrollHeight;
+            var top = w.offsetTop;
+            if (scroll > top - logoTop && scroll < top + h - logoTop) {
+                logo.classList.add('logo--black');
+                break;
+            } else logo.classList.remove('logo--black');
+            // });
+        }
 
-    if (scroll > necessaryTop) {
-        logo.classList.add('logo--fixed');
-    } else {
-        logo.classList.remove('logo--fixed');
+        if (scroll > necessaryTop) {
+            logo.classList.add('logo--fixed');
+        } else {
+            logo.classList.remove('logo--fixed');
+        }
+
     }
 }
 
 function findProduct() {
 
-    let scroll = window.scrollY;
-    let windowH = window.innerHeight;
+    var scroll = window.scrollY;
+    var windowH = window.innerHeight;
 
-    let products = document.querySelectorAll('.product');
-    products.forEach(p => {
+    var products = document.querySelectorAll('.product');
+    products.forEach(function(p) {
 
-        let blockH = parseInt(getComputedStyle(p).height);
-        let top = p.offsetTop;
-        let x = top - (windowH - blockH) / 2;
-        let video = p.querySelector('video');
 
-        if ((scroll > (x - 100)) && (scroll < (x + 100))) {
+        var blockH = parseInt(getComputedStyle(p).height);
+        var top = p.offsetTop;
+        var x = top - (windowH - blockH) / 2;
+        var video = p.querySelector('video');
+
+        if (scroll > x - 100 && scroll < x + 100 && video) {
+            // let parent = p.parentNode.parentNode;
+            // let currentColor = getComputedStyle(p.querySelector('.product__text-block')).backgroundColor;
+            // parent.style.background = currentColor;
+
             video.play();
-            p.classList.add('product--current')
-                // p.parentNode.style.background = 'rgba(0,0,0,0.5)';
-
-        } else if (video) {
-            p.classList.remove('product--current')
+            p.classList.add('product--current');
+        } else {
             video.pause();
-            // p.parentNode.removeAttribute('style');
+            p.classList.remove('product--current');
         }
     });
-
 }
 
-
 function playTourVideos() {
-    console.log('hi');
-    let scroll = window.scrollY,
+    var scroll = window.scrollY,
         tourMeetings = document.querySelector('.tour__meetings'),
         tourTop = tourMeetings.offsetTop,
         tourH = tourMeetings.scrollHeight,
@@ -105,8 +108,8 @@ function playTourVideos() {
 
     function playVideo(arr, i) {
         if (i < arr.length) {
-            let layout = arr[i].querySelector('.tour__video-layout');
-            let video = arr[i].querySelector('video');
+            var layout = arr[i].querySelector('.tour__video-layout');
+            var video = arr[i].querySelector('video');
 
             arr[i].classList.add('tour__meet-block--current');
             video.play();
@@ -119,9 +122,7 @@ function playTourVideos() {
             };
         }
     }
-
 }
-
 
 // Contrast Functions:
 
